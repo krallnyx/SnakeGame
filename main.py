@@ -1,6 +1,7 @@
 from turtle import Screen
 import time
 from snake import Snake
+from food import Food
 
 
 class Game:
@@ -31,10 +32,14 @@ class Game:
             for seg in range(len(snake.snake) - 1, 0, -1):
                 snake.snake[seg].goto(snake.snake[seg - 1].xcor(), snake.snake[seg - 1].ycor())
             snake.snake[0].forward(10)
+            if snake.snake[0].distance(food) < 15:
+                food.refresh()
+                snake.add_length({snake.snake[-1].xcor(), snake.snake[-1].ycor()})
         self.screen.exitonclick()
 
 
 if __name__ == '__main__':
     game = Game()
     snake = Snake()
+    food = Food()
     game.run()
