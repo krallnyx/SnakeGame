@@ -2,6 +2,7 @@ from turtle import Screen
 import time
 from snake import Snake
 from food import Food
+from scoreboard import Scoreboard
 
 
 class Game:
@@ -35,6 +36,7 @@ class Game:
             if snake.snake[0].distance(food) < 15:
                 food.refresh()
                 snake.add_length({snake.snake[-1].xcor(), snake.snake[-1].ycor()})
+                scoreboard.increase_score()
         self.screen.exitonclick()
 
 
@@ -42,4 +44,5 @@ if __name__ == '__main__':
     game = Game()
     snake = Snake()
     food = Food()
+    scoreboard = Scoreboard()
     game.run()
