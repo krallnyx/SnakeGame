@@ -38,7 +38,7 @@ class Game:
                 snake.add_length({snake.snake[-1].xcor(), snake.snake[-1].ycor()})
                 scoreboard.increase_score()
             if snake.snake[0].xcor() > 280 or snake.snake[0].xcor() < -300 or \
-                    snake.snake[0].ycor() > 290 or snake.snake[0].ycor() < -280:
+                    snake.snake[0].ycor() > 290 or snake.snake[0].ycor() < -290:
                 game_is_on = False
             for i in range(1, len(snake.snake) - 1):
                 if snake.snake[0].distance(snake.snake[i]) < 9:
