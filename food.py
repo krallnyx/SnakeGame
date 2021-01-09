@@ -14,4 +14,5 @@ class Food(Turtle):
         self.refresh()
 
     def refresh(self):
+        """Erase the current food (if any) and spawn a new one at a random position"""
         self.goto(random.randint(-280, 280), random.randint(-280, 280))
