@@ -1,5 +1,6 @@
-from turtle import Screen, Turtle
+from turtle import Screen
 import time
+from snake import Snake
 
 
 class Game:
@@ -10,35 +11,30 @@ class Game:
         self.screen.bgcolor("black")
         self.screen.title("Krall's Snake Game")
         self.screen.tracer(0)
-        self.snake = []
 
-    def add_length(self, pos):
-        """Adds a segment to the snake at pos=(x,y)"""
-        new_turtle = Turtle("square")
-        new_turtle.color("white")
-        new_turtle.penup()
-        new_turtle.goto(pos)
-        self.snake.append(new_turtle)
-
-    def init_snake(self):
-        """Create the initial 3 segments snake"""
-        starting_positions = [(0, 0), (-20, 0), (-40, 0)]
-        for start in starting_positions:
-            self.add_length(start)
+    def control(self):
+        """Key listener for arrow keys"""
+        self.screen.listen()
+        self.screen.onkey(snake.snake_up, "Up")
+        self.screen.onkey(snake.snake_down, "Down")
+        self.screen.onkey(snake.snake_right, "Right")
+        self.screen.onkey(snake.snake_left, "Left")
 
     def run(self):
         """Main method of the game"""
-        self.init_snake()
+
+        self.control()
         game_is_on = True
         while game_is_on:
             self.screen.update()
             time.sleep(0.1)
-            for seg in range(len(self.snake)-1, 0, -1):
-                self.snake[seg].goto(self.snake[seg-1].xcor(), self.snake[seg-1].ycor())
-            self.snake[0].forward(10)
+            for seg in range(len(snake.snake) - 1, 0, -1):
+                snake.snake[seg].goto(snake.snake[seg - 1].xcor(), snake.snake[seg - 1].ycor())
+            snake.snake[0].forward(10)
         self.screen.exitonclick()
 
 
 if __name__ == '__main__':
     game = Game()
+    snake = Snake()
     game.run()
