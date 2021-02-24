@@ -24,10 +24,8 @@ class Game:
 
     def run(self):
         """Main method of the game"""
-
         self.control()
-        game_is_on = True
-        while game_is_on:
+        while True:
             self.screen.update()
             time.sleep(0.05)
             for seg in range(len(snake.snake) - 1, 0, -1):
@@ -39,12 +37,13 @@ class Game:
                 scoreboard.increase_score()
             if snake.snake[0].xcor() > 280 or snake.snake[0].xcor() < -300 or \
                     snake.snake[0].ycor() > 290 or snake.snake[0].ycor() < -290:
-                game_is_on = False
+                scoreboard.game_over()
+                snake.reset()
             for i in range(1, len(snake.snake) - 1):
                 if snake.snake[0].distance(snake.snake[i]) < 9:
-                    game_is_on = False
-        scoreboard.game_over()
-        self.screen.exitonclick()
+                    scoreboard.game_over()
+                    snake.reset()
+        # self.screen.exitonclick()
 
 
 if __name__ == '__main__':
